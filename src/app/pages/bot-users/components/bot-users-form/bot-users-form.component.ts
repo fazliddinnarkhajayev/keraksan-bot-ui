@@ -7,20 +7,20 @@ import { Response } from 'src/app/shared/models/reponse';
 import { NzModules } from 'src/app/shared/modules/nz-modules.module';
 import { NzDrawerRef } from 'ng-zorro-antd/drawer';
 import { NgxMaskDirective } from 'ngx-mask';
-import { AdminsService } from '../../services/admins.service';
+import { BotUsersService } from '../../services/bot-users.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { AdminModel } from '../../models/admin.model';
+import { BotUserModel } from '../../models/bot-users.model';
 // import { RolesService } from 'src/app/shared/services/references/role.service';
 
 @Component({
-  selector: 'app-admin-form',
-  templateUrl: './admin-form.component.html',
-  styleUrls: ['./admin-form.component.scss'],
+  selector: 'app-bot-users-form',
+  templateUrl: './bot-users-form.component.html',
+  styleUrls: ['./bot-users-form.component.scss'],
   imports: [NzModules, TranslateModule, ReactiveFormsModule, NgIf, CommonModule, NgxMaskDirective],
   standalone: true,
 })
-export class AdminFormComponent implements OnInit {
-  @Input() admin?: AdminModel;
+export class BotUserFormComponent implements OnInit {
+  @Input() botUser?: BotUserModel;
   @Output() close = new EventEmitter<void>();
   @Output() formSubmitted = new EventEmitter<void>();
 
@@ -38,7 +38,7 @@ export class AdminFormComponent implements OnInit {
     private toastr: NotificationService,
     // private roleService: RolesService,
     private drawerRef: NzDrawerRef,
-    private adminService: AdminsService,
+    private adminService: BotUsersService,
     private translate: TranslateService) { }
 
   ngOnInit(): void {
@@ -47,12 +47,12 @@ export class AdminFormComponent implements OnInit {
   }
 
   patchForm() {
-    if (this.admin) {
+    if (this.botUser) {
       this.form.patchValue({
-        id: this.admin.id,
-        fullName: this.admin.fullName,
-        username: this.admin.username,
-        phoneNumber: this.admin.phoneNumber,
+        id: this.botUser.id,
+        fullName: this.botUser.fullName,
+        username: this.botUser.username,
+        phoneNumber: this.botUser.phoneNumber,
       });
       this.form.get('password')?.clearValidators();
       this.form.get('password')?.updateValueAndValidity();
@@ -84,8 +84,8 @@ export class AdminFormComponent implements OnInit {
     this.form.reset();
   }
   onSubmit() {
-    if (this.admin) {
-      this.adminService.update(this.form.value, this.admin.id).subscribe((res: any) => {
+    if (this.botUser) {
+      this.adminService.update(this.form.value, this.botUser.id).subscribe((res: any) => {
         if (res && res.success) {
           this.toastr.success(this.translate.instant('successfullUpdated'), '');
           this.drawerRef.close({ success: true });

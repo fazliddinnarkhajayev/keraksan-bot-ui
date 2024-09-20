@@ -4,22 +4,22 @@ import { NzModules } from 'src/app/shared/modules/nz-modules.module';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AdminsService } from './services/admins.service';
-import { AdminModel } from './models/admin.model';
+import { BotUsersService } from './services/bot-users.service';
+import { BotUserModel } from './models/bot-users.model';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { AdminFormComponent } from './components/admin-form/admin-form.component';
+import { BotUserFormComponent } from './components/bot-users-form/bot-users-form.component';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { ResponseContent } from 'src/app/shared/models/res-content.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { IconsProviderModule } from 'src/app/shared/modules/icons-provider.module';
 
 @Component({
-  selector: 'app-admins',
+  selector: 'app-bot-users',
   standalone: true,
   imports: [CommonModule, NzModules, TranslateModule, FormsModule, IconsProviderModule],
   providers: [NzModalService],
-  templateUrl: './admins.component.html',
-  styleUrls: ['./admins.component.scss'],
+  templateUrl: './bot-users.component.html',
+  styleUrls: ['./bot-users.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   animations: [
     trigger('showHideFilter', [
@@ -37,10 +37,10 @@ import { IconsProviderModule } from 'src/app/shared/modules/icons-provider.modul
     ])
   ]
 })
-export class AdminsComponent implements OnInit {
+export class BotUsersComponent implements OnInit {
 
   confirmModal?: NzModalRef;
-  data: AdminModel[];
+  data: BotUserModel[];
   loader: boolean = false;
   isFilterVisible: boolean = false
   filter = {id: '',loadingLocation: '',deliveryLocation: '',statusId: ''};
@@ -56,7 +56,7 @@ export class AdminsComponent implements OnInit {
   constructor(
     private toastr: NotificationService,
     private modal: NzModalService,
-    private adminsService: AdminsService,
+    private adminsService: BotUsersService,
     private drawer: NzDrawerService,
     private translate: TranslateService) { }
 
@@ -65,7 +65,7 @@ export class AdminsComponent implements OnInit {
   }
   getAll() {
     // this.loader = true;
-    this.adminsService.getAll(this.pageParams).subscribe((res: ResponseContent<AdminModel[]>) => {
+    this.adminsService.getAll(this.pageParams).subscribe((res: ResponseContent<BotUserModel[]>) => {
       if (res && res.success) {
         this.data = res.data.content;
         this.loader = false;
@@ -79,7 +79,7 @@ export class AdminsComponent implements OnInit {
   add(): void {
     const drawerRef: any = this.drawer.create({
       nzTitle: this.translate.instant('add_admins'),
-      nzContent: AdminFormComponent,
+      nzContent: BotUserFormComponent,
       nzPlacement: 'right',
     });
     drawerRef.afterClose.subscribe(() => {
@@ -87,12 +87,12 @@ export class AdminsComponent implements OnInit {
       drawerRef.componentInstance?.form.reset();
     });
   }
-  update(item:AdminModel) {
+  update(item: BotUserModel) {
     const drawerRef: any = this.drawer.create({
       nzTitle: this.translate.instant('edit_admins'),
-      nzContent: AdminFormComponent,
+      nzContent: BotUserFormComponent,
       nzPlacement: 'right',
-      nzContentParams: { admin: item }
+      nzContentParams: { botUser: item }
     });
     drawerRef.afterClose.subscribe(() => {
       this.getAll();
@@ -107,7 +107,7 @@ export class AdminsComponent implements OnInit {
       nzCancelText: this.translate.instant('cancel'),
       nzOkDanger: true,
       nzOnOk: () =>
-        this.adminsService.delete(id).subscribe((res: ResponseContent<AdminModel[]>) => {
+        this.adminsService.delete(id).subscribe((res: ResponseContent<BotUserModel[]>) => {
           if (res && res.success) {
             this.toastr.success(this.translate.instant('successfullDeleted'),'');
             this.getAll();

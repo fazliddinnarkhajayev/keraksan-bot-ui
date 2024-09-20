@@ -20,7 +20,7 @@ RUN npm run build --prod
 FROM nginx:1.23-alpine
 
 # Copy the build output to Nginx's HTML folder
-COPY --from=build /app/dist/admin-ui-v2 /usr/share/nginx/html
+COPY --from=build /app/dist/keraksan-bot-ui /usr/share/nginx/html
 
 # Copy the custom Nginx configuration files
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf

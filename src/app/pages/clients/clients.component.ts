@@ -15,7 +15,7 @@ import { IconsProviderModule } from 'src/app/shared/modules/icons-provider.modul
 import { NzModules } from 'src/app/shared/modules/nz-modules.module';
 import { PipeModule } from 'src/app/shared/pipes/pipes.module';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import { SendPushComponent } from '../drivers/components/send-push/send-push.component';
+// import { SendPushComponent } from '../drivers/components/send-push/send-push.component';
 
 @Component({
   selector: 'app-clients',
@@ -150,10 +150,10 @@ export class ClientsComponent implements OnInit {
     this.getAll();
   }
   sendNotification() {
-    this.drawer.create({
-      nzTitle: this.translate.instant('send_push'),
-      nzContent: SendPushComponent,
-      nzPlacement: 'right'
-    }) 
+    // this.drawer.create({
+    //   nzTitle: this.translate.instant('send_push'),
+    //   nzContent: SendPushComponent,
+    //   nzPlacement: 'right'
+    // }) 
   }
 }

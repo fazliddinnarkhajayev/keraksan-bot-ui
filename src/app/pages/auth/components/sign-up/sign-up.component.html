@@ -1,6 +1,6 @@
 <div class="container">
   <div class="left-panel">
-    <img [@fadeInOut] src="../../../../assets/images/logo/auth-logo.svg" alt="" width="60%">
+    <!-- <img [@fadeInOut] src="../../../../assets/images/logo/auth-logo.svg" alt="" width="60%"> -->
   </div>
   <div class="right-panel">
     <div class="create-account" [@fadeInOut]>
@@ -15,7 +15,6 @@
         <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched" class="error-message">
           <span *ngIf="form.get('username')?.errors['required']">Логин не может быть пустым</span>
           <span *ngIf="form.get('username')?.errors['minlength']">Логин должен содержать минимум 4 символов</span>
-          <span *ngIf="form.get('username')?.errors['maxlength']">Логин не может превышать 20 символов</span>
         </div>
 
         <nz-input-group class="input-group" [nzSuffix]="suffixTemplateEye" [nzPrefix]="prefixTemplateLock">
@@ -29,7 +28,6 @@
         </ng-template>
         <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="error-message">
           <span *ngIf="form.get('password')?.errors['required']">Пароль не может быть пустым</span>
-          <span *ngIf="form.get('password')?.errors['minlength']">Пароль должен содержать минимум 4 символов</span>
           <span *ngIf="form.get('password')?.errors['maxlength']">Пароль не может превышать 8 символов</span>
         </div>
         <button type="submit" nz-button nzType="primary" class="login-button" [disabled]="form.invalid" [nzLoading]="form.disabled">Войти</button>

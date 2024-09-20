@@ -1,6 +1,7 @@
 import { BaseModel } from "src/app/shared/models/base-model";
 
 export interface AdminModel extends BaseModel {
+    id: string,
     fio?: string;
     username?: string;
     fullName?: string;

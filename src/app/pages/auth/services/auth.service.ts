@@ -29,10 +29,10 @@ export class AuthService {
     if (this.isAuthenticated) {
       return throwError('User is already logged in.');
     }
-    return this.http.post(`${env.apiUrl}/users/login`, credentials).pipe(
+    return this.http.post(`${env.apiUrl}/auth/login`, credentials).pipe(
       switchMap((response: any) => {
         // Set the access token
-        this.accessToken = response.data.token;
+        this.accessToken = response.token;
         // Parse the access token and get the user's data
         let user: any;
         user = this.accessToken ? jwtDecode(this.accessToken) : null;

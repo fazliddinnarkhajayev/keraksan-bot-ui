@@ -1,6 +1,9 @@
 {
     "control_panel": "Панель управления",
     "adminstration": "Администраторы",
+    "user_information": "Информация о пользователе",
+    "area": "Город",
+    "profession": "Профессия",
     "secure_transaction": "Безопасные сделки",
     "clients": "Клиенты",
     "drivers": "Водители",

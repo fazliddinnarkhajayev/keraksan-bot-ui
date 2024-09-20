@@ -13,16 +13,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'admin-ui-v2'`, () => {
+  it(`should have as title 'keraksan-bot-ui'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('admin-ui-v2');
+    expect(app.title).toEqual('keraksan-bot-ui');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('admin-ui-v2 app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('keraksan-bot-ui app is running!');
   });
 });

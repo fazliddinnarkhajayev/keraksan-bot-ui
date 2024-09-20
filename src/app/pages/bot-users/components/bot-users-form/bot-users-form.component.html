@@ -8,7 +8,7 @@
     <input formControlName="username" type="text" nz-input placeholder="{{'login_admin' | translate}}" />
   </nz-input-group>
 
-  <nz-input-group class="input-group" [nzSuffix]="suffixTemplateEye" *ngIf="!admin">
+  <nz-input-group class="input-group" [nzSuffix]="suffixTemplateEye" *ngIf="!botUser">
     <input formControlName="password" type="text" nz-input placeholder="{{'password' | translate}}" />
   </nz-input-group>
   <ng-template #suffixTemplateEye>
