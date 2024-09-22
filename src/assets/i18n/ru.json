@@ -1,4 +1,10 @@
 {
+    "sex": "Пол",
+    "area": "Область",
+    "profession": "Профессия",
+    "birthday_date": "Дата рождения",
+    "phone_number": "Номер телефона",
+    "user_id": "ID пользователя",
     "control_panel": "Панель управления",
     "adminstration": "Администраторы",
     "user_information": "Информация о пользователе",

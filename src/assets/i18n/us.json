@@ -1,4 +1,10 @@
 {
+    "sex": "Sex",
+    "area": "Area",
+    "profession": "Profession",
+    "birthday_date": "Birthday date",
+    "phone_number": "Phone number",
+    "user_id": "User ID",
     "control_panel": "Control Panel",
     "adminstration": "Administrators",
     "secure_transaction": "Secure transaction",

@@ -5,6 +5,8 @@ export interface BotUserModel extends BaseModel {
     fio?: string;
     username?: string;
     fullName?: string;
+    firstName?: string;
+    lastName?: string;
     login?: string;
     roleId?: string;
     dataAt?: string;
@@ -15,5 +17,10 @@ export interface BotUserModel extends BaseModel {
     phoneNumbers?: any[];
     active?: boolean;
     blocked?: boolean;
+    chatId: number;
+    birthdayDate: Date;
+    sex?: string;
+    professionName?: string;
+    areaName?: string;
     user: {id: number, lastLogin: Date, userType: string, role: any};
 }
