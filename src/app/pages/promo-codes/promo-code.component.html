@@ -1,0 +1,78 @@
+<div style="margin: 5px 0px 20px 0;">
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+    <h2>{{'promo_codes' | translate}}</h2>
+
+    <div style="display: flex; gap: 10px">
+      <button nz-button class="success-button" (click)="add()">
+        <span nz-icon nzType="plus" nzTheme="outline"></span>
+        {{'add' | translate}}
+      </button>
+
+      <!-- <button nz-button class="secondary-button" (click)="toggleFilter()">
+        <span nz-icon nzType="filter" nzTheme="fill"></span>
+        {{'filter' | translate}}
+      </button> -->
+    </div>
+  </div>
+</div>
+
+<nz-table
+  [nzSize]="'middle'"
+  [nzPaginationPosition]="'bottom'"
+  [nzData]="data"
+  [nzPageSizeOptions]="[10, 20, 30]"
+  [nzShowPagination]="true"
+  [nzShowSizeChanger]="true"
+  [nzLoading]="loader"
+  [nzNoResult]="('no_data' | translate)"z
+  (nzPageIndexChange)="onPageIndexChange($event)"
+  (nzPageSizeChange)="onPageSizeChange($event)">
+  <thead>
+    <tr>
+      <th> No </th>
+      <th>{{'status' | translate}}</th>
+      <th>{{'group' | translate}}</th>
+      <th>{{'code' | translate}}</th>
+      <th>{{'score' | translate}}</th>
+      <th>{{'user_id' | translate}}</th>
+      <th>{{'full_name' | translate}} </th>
+      <th>{{'created_at' | translate}} </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{item.status}}</td>
+      <td>{{item.groupName}}</td>
+      <td>{{item.code}}</td>
+      <td>{{item.score}}</td>
+      <td>{{item.userId}}</td>
+      <td>{{item.fullName}}</td>
+      <td>{{item.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+      <td class="action-col">
+        <a nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click">
+          <i nz-icon nzType="ellipsis" nzTheme="outline" style="cursor: pointer;"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item (click)="update(item)">
+              <div style="display: flex; align-items: center; gap:5px">
+                <span nz-icon nzType="edit" nzTheme="outline" style="color: green;"></span>
+                <span>{{'edit' | translate}}</span>
+              </div>
+            </li>
+            <li nz-menu-item (click)="remove(item.id)">
+              <div style="display: flex; align-items: center; gap: 5px;">
+                <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
+                <span>{{ 'remove' | translate }}</span>
+              </div>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<app-admin-form *ngIf="showForm"></app-admin-form>

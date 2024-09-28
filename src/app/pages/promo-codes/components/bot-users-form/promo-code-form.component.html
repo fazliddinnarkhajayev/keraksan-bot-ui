@@ -1,0 +1,31 @@
+<form [formGroup]="form">
+
+  <nz-input-group class="input-group">
+    <input formControlName="groupName" type="text" nz-input placeholder="{{'group' | translate}}" />
+  </nz-input-group>
+
+  <nz-input-group class="input-group">
+    <input formControlName="code" type="text" nz-input placeholder="{{'promo_code' | translate}}" />
+  </nz-input-group>
+
+  <nz-input-group class="input-group">
+    <input formControlName="score" type="text" nz-input placeholder="{{'score' | translate}}" />
+  </nz-input-group>
+
+  <nz-input-group class="input-group">
+    <nz-select nzPlaceHolder="{{'user_id' | translate}}" formControlName="userId" style="width: 100% !important;">
+      <nz-option [nzValue]="user.userId" [nzLabel]="user.tg_username" *ngFor="let user of botUsers"></nz-option>
+    </nz-select>
+  </nz-input-group>
+
+
+  <div style="position: absolute; bottom: 10px; right: 10px; display: flex; gap: 10px;">
+    <button nz-button class="danger-button" (click)="onCancel()">
+      {{ 'cancel' | translate }}
+    </button>
+    <button nz-button class="success-button" [disabled]="form.invalid" (click)="onSubmit()">
+      {{ 'save' | translate }}
+    </button>
+  </div>
+
+</form>

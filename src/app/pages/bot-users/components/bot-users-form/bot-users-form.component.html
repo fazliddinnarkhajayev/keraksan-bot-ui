@@ -1,22 +1,26 @@
 <form [formGroup]="form">
 
-  <nz-input-group class="input-group">
-    <input formControlName="fullName" type="text" nz-input placeholder="{{'full_name' | translate}}" />
-  </nz-input-group>
-
-  <nz-input-group class="input-group">
-    <input formControlName="username" type="text" nz-input placeholder="{{'login_admin' | translate}}" />
-  </nz-input-group>
-
-  <nz-input-group class="input-group" [nzSuffix]="suffixTemplateEye" *ngIf="!botUser">
-    <input formControlName="password" type="text" nz-input placeholder="{{'password' | translate}}" />
-  </nz-input-group>
-  <ng-template #suffixTemplateEye>
-    <i nz-icon [nzType]="'sync'" style="cursor: pointer;" (click)="generatePassword()"></i>
-  </ng-template>
-
-  <nz-input-group class="input-group">
+   <nz-input-group class="input-group">
     <input formControlName="phoneNumber" type="text" nz-input placeholder="{{ 'phone' | translate }}" mask="+000 00 000 00 00"/>
+  </nz-input-group>
+
+  <nz-input-group class="input-group">
+    <nz-select nzPlaceHolder="{{'status' | translate}}" formControlName="status" style="width: 100% !important;">
+      <nz-option [nzValue]="status" [nzLabel]="status" *ngFor="let status of statuses"></nz-option>
+    </nz-select>
+  </nz-input-group>
+
+  <nz-input-group class="input-group">
+    <nz-select nzPlaceHolder="{{'area' | translate}}" formControlName="areaId" style="width: 100% !important;">
+      <nz-option [nzValue]="area.id" [nzLabel]="area.name" *ngFor="let area of areas"></nz-option>
+    </nz-select>
+  </nz-input-group>
+
+  
+  <nz-input-group class="input-group">
+    <nz-select nzPlaceHolder="{{'profession' | translate}}" formControlName="professionId" style="width: 100% !important;">
+      <nz-option [nzValue]="profession.id" [nzLabel]="profession.name" *ngFor="let profession of professions"></nz-option>
+    </nz-select>
   </nz-input-group>
 
 

@@ -1,4 +1,10 @@
-{
+{   
+    "last_registered_bot_user": "Last registered bot user",
+    "bot_users": "Bot users",
+    "group": "Group",
+    "score": "Score",
+    "created_at": "Created at",
+    "promo_codes": "Promo codes", 
     "sex": "Sex",
     "area": "Area",
     "profession": "Profession",

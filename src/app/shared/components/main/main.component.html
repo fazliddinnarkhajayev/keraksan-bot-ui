@@ -37,6 +37,11 @@
 
         </ul>
       </li>
+      <li nzMatchRouter nz-menu-item nz-tooltip nzTooltipPlacement="right"
+      [nzTooltipTitle]="isCollapsed ? ('promo_codes' | translate) : ''" routerLink="/promo-codes">
+      <span nz-icon nzType="user"></span>
+      <span>{{'promo_codes' | translate}}</span>
+    </li>
     </ul>
   </nz-sider>
 

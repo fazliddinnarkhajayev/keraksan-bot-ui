@@ -15,6 +15,9 @@ export class ProfessionService {
     getAll(params?: any): Observable<Response<ProfessionModel[]>> {
         return this.http.get<Response<ProfessionModel[]>>(env.references + `references/all-professions?pageIndex=${params?.pageIndex}&pageSize=${params?.pageSize}&sortBy=${params?.sortBy}&sortType=${params?.sortType}`)
     }
+    getAllDir(): Observable<Response<ProfessionModel[]>> {
+        return this.http.get<Response<ProfessionModel[]>>(env.references + `references/all-professions-dir`)
+    }
     create(data: ProfessionModel) {
         return this.http.post<Response<ProfessionModel[]>>(env.references + 'references/professions', data)
     }

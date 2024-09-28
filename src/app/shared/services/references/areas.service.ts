@@ -15,6 +15,9 @@ export class AreasService {
     getAll(params?: any): Observable<Response<AreaModel[]>> {
         return this.http.get<Response<AreaModel[]>>(env.references + `references/all-areas?pageIndex=${params?.pageIndex}&pageSize=${params?.pageSize}&sortBy=${params?.sortBy}&sortType=${params?.sortType}`)
     }
+    getAllDir(): Observable<Response<AreaModel[]>> {
+        return this.http.get<Response<AreaModel[]>>(env.references + `references/all-areas-dir`)
+    }
     create(data: AreaModel) {
         return this.http.post<Response<AreaModel[]>>(env.references + 'references/areas', data)
     }

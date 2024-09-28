@@ -1,1 +1,18 @@
-<p>dashboard works!</p>
+<div class="container">
+
+    <ul>
+        <li>Total users: {{ totalUsers }}</li>
+    </ul>
+    
+    <ul>
+        <li> {{ 'last_registered_bot_user' | translate }}: {{ lastRegisteredUser?.created_at.split('T')[0] }} {{ lastRegisteredUser?.first_name }} {{ lastRegisteredUser?.last_name }}</li>
+    </ul>
+
+    <ul>
+        <li *ngFor="let userCount of usersCountsByStatus">{{ userCount.status == 'active' ? 'Active users' : 'Inactive users' }}: {{ userCount.count }}</li>
+    </ul>
+
+    <ul>
+        <li *ngFor="let userCount of usersCountsByArea">{{ userCount.name }}: {{ userCount.count }}</li>
+    </ul>
+</div>

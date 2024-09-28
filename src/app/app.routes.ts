@@ -16,6 +16,7 @@ export const appRoutes: Route[] = [
       // References
       { path: 'references/areas', loadChildren: () => import('./pages/references/areas/areas.routes').then(m => m.default), canActivate: [AuthGuard] },
       { path: 'references/profession', loadChildren: () => import('./pages/references/profession/profession.routes').then(m => m.default), canActivate: [AuthGuard] },
+      { path: 'promo-codes', loadChildren: () => import('./pages/promo-codes/promo-code.routes').then(m => m.default), canActivate: [AuthGuard] },
     ]
   },
   {

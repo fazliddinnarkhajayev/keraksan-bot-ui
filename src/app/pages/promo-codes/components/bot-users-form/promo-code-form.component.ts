@@ -7,63 +7,58 @@ import { Response } from 'src/app/shared/models/reponse';
 import { NzModules } from 'src/app/shared/modules/nz-modules.module';
 import { NzDrawerRef } from 'ng-zorro-antd/drawer';
 import { NgxMaskDirective } from 'ngx-mask';
-import { BotUsersService } from '../../services/bot-users.service';
+import { PromoCodesService } from '../../services/promo-codes.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { BotUserModel } from '../../models/bot-users.model';
-import { AreaModel } from 'src/app/pages/references/areas/models/areas.model';
-import { ProfessionModel } from 'src/app/pages/references/profession/models/profession.model';
-import { AreasService } from 'src/app/shared/services/references/areas.service';
-import { ProfessionService } from 'src/app/shared/services/references/profession.service';
+import { PromoCodeModel } from '../../models/promo-code.model';
+import { BotUsersService } from 'src/app/pages/bot-users/services/bot-users.service';
+import { BotUserModel } from 'src/app/pages/bot-users/models/bot-users.model';
 // import { RolesService } from 'src/app/shared/services/references/role.service';
 
 @Component({
-  selector: 'app-bot-users-form',
-  templateUrl: './bot-users-form.component.html',
-  styleUrls: ['./bot-users-form.component.scss'],
+  selector: 'app-promo-code-form',
+  templateUrl: './promo-code-form.component.html',
+  styleUrls: ['./promo-code-form.component.scss'],
   imports: [NzModules, TranslateModule, ReactiveFormsModule, NgIf, CommonModule, NgxMaskDirective],
   standalone: true,
 })
-export class BotUserFormComponent implements OnInit {
-  @Input() botUser?: BotUserModel;
+export class PromoCodeFormComponent implements OnInit {
+  @Input() promoCode?: PromoCodeModel;
   @Output() close = new EventEmitter<void>();
   @Output() formSubmitted = new EventEmitter<void>();
 
   visible: boolean = false;
-  areas: AreaModel[] = [];
-  professions: ProfessionModel[] = [];
-  statuses = ['active', 'disactive'];
 
   form: FormGroup = new FormGroup({
     id: new FormControl(''),
-    phoneNumber: new FormControl('+998', [Validators.required]),
-    professionId: new FormControl('', [Validators.required]),
-    areaId: new FormControl('', [Validators.required]),
-    status: new FormControl('')
+    groupName: new FormControl('', [Validators.required]),
+    userId: new FormControl('', [Validators.required]),
+    code: new FormControl('', [Validators.required]),
+    score: new FormControl('', [Validators.required])
   });
+  botUsers: any[] = [];
 
   constructor(
     private toastr: NotificationService,
     // private roleService: RolesService,
     private drawerRef: NzDrawerRef,
-    private adminService: BotUsersService,
-    private areasService: AreasService,
-    private professionService: ProfessionService,
-    private translate: TranslateService) { }
+    private adminService: PromoCodesService,
+    private translate: TranslateService,
+    private botUsersService: BotUsersService
+    ) { }
 
   ngOnInit(): void {
-    this.getAreas();
-    this.getProfessions();
+    this.getBotUsers();
     this.patchForm();
   }
 
   patchForm() {
-    if (this.botUser) {
+    if (this.promoCode) {
       this.form.patchValue({
-        id: this.botUser.id,
-        phoneNumber: this.botUser.phoneNumber,
-        professionId: this.botUser.professionId,
-        areaId: this.botUser.areaId,
-        status: this.botUser.status
+        id: this.promoCode.id,
+        groupName: this.promoCode.groupName,
+        code: this.promoCode.code,
+        score: this.promoCode.score,
+        userId: this.promoCode.userId,
       });
       this.form.get('password')?.clearValidators();
       this.form.get('password')?.updateValueAndValidity();
@@ -78,22 +73,13 @@ export class BotUserFormComponent implements OnInit {
     }
 
   }
-  getAreas() {
-    this.areasService.getAllDir().subscribe((res: Response<AreaModel[]>) => {
+  getBotUsers() {
+    this.botUsersService.getAllDir().subscribe((res: any) => {
       if (res && res.success) {
-        this.areas = res.data;
+        this.botUsers = res.data;
       }
     });
   }
-
-  getProfessions() {
-    this.professionService.getAllDir().subscribe((res: Response<ProfessionModel[]>) => {
-      if (res && res.success) {
-        this.professions = res.data;
-      }
-    });
-  }
-
   generatePassword() {
     this.form.patchValue({
       password: Math.random().toString(36).slice(-8)
@@ -104,8 +90,8 @@ export class BotUserFormComponent implements OnInit {
     this.form.reset();
   }
   onSubmit() {
-    if (this.botUser) {
-      this.adminService.update(this.form.value, this.botUser.id).subscribe((res: any) => {
+    if (this.promoCode) {
+      this.adminService.update(this.form.value, this.promoCode.id).subscribe((res: any) => {
         if (res && res.success) {
           this.toastr.success(this.translate.instant('successfullUpdated'), '');
           this.drawerRef.close({ success: true });

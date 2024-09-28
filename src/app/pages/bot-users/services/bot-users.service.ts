@@ -16,8 +16,24 @@ export class BotUsersService {
     return this.http.get<ResponseContent<BotUserModel[]>>(env.apiUrl + `/all-bot-users?pageIndex=${params.pageIndex}&pageSize=${params.pageSize}&totalPagesCount=${params.totalPagesCount}&sortBy=${params.sortBy}&sortType=${params.sortType}`);
   }
 
+  getAllDir(): Observable<ResponseContent<BotUserModel[]>> {
+    return this.http.get<ResponseContent<BotUserModel[]>>(env.apiUrl + `/all-bot-users-dir`);
+  }
+
   getAllByStaff() {
     return this.http.get(env.apiUrl + '/all-bot-users');
+  }
+
+  getUsersCountByStatus() {
+    return this.http.get(env.apiUrl + '/all-bot-users-count-by-status');
+  }
+
+  getUsersCountByArea() {
+    return this.http.get(env.apiUrl + '/all-bot-users-count-by-area');
+  }
+
+  getLastRegisteredUser() {
+    return this.http.get(env.apiUrl + '/get-last-registered-user');
   }
 
   create(data: BotUserModel) {

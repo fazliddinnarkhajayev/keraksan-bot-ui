@@ -20,7 +20,10 @@ export interface BotUserModel extends BaseModel {
     chatId: number;
     birthdayDate: Date;
     sex?: string;
+    status?: string;
     professionName?: string;
     areaName?: string;
+    professionId?: string;
+    areaId?: string;
     user: {id: number, lastLogin: Date, userType: string, role: any};
 }
