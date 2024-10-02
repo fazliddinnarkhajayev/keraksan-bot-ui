@@ -5,7 +5,7 @@
     </ul>
     
     <ul>
-        <li> {{ 'last_registered_bot_user' | translate }}: {{ lastRegisteredUser?.created_at.split('T')[0] }} {{ lastRegisteredUser?.first_name }} {{ lastRegisteredUser?.last_name }}</li>
+        <li> {{ 'last_registered_bot_user' | translate }}: {{ lastRegisteredUser.created_at?.split('T')[0] }} {{ lastRegisteredUser?.first_name }} {{ lastRegisteredUser?.last_name }}</li>
     </ul>
 
     <ul>
