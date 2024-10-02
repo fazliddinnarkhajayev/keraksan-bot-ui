@@ -17,13 +17,13 @@ jobs:
           node-version: 18 
      
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/test-admin-ui .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/test-keraksan-bot-ui .
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
       
       - name: Publish image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/test-admin-ui:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/test-keraksan-bot-ui:latest
 
   deploy:
     needs: build
@@ -36,11 +36,11 @@ jobs:
 
       - name: SSH into the instance and deploy
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@65.1.148.56 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@13.126.91.10 << 'EOF'
            sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/test-admin-ui:latest
-           sudo docker stop test-admin-ui-container || true
-           sudo docker rm -f test-admin-ui-container || true
-           sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/test-admin-ui || true
-           sudo docker run -d -p 4300:4300 --name test-admin-ui-container ${{ secrets.DOCKER_USERNAME }}/test-admin-ui:latest
+           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/test-keraksan-bot-ui:latest
+           sudo docker stop test-keraksan-bot-ui-container || true
+           sudo docker rm -f test-keraksan-bot-ui-container || true
+           sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/test-keraksan-bot-ui || true
+           sudo docker run -d -p 4300:4300 --name test-keraksan-bot-ui-container ${{ secrets.DOCKER_USERNAME }}/test-keraksan-bot-ui:latest
           EOF
