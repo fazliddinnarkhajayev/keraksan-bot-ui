@@ -1,8 +1,8 @@
 export const env = {
   production: false,
-  apiUrl: 'http://localhost:3000/api',
+  apiUrl: 'http://13.126.91.10/api',
   adminUrl: 'https://test-api.tirgo.io/api/v2',
-  references: 'http://localhost:3000/api/',
+  references: 'http://13.126.91.10/api/',
   merchantUrl: 'https://test-api.tirgo.io/api/v2',
   orderApiUrl: 'https://test-api.tirgo.io/api/v2',
 };
